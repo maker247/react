@@ -6,7 +6,6 @@ class App extends react.Component {
     state = {
         articles: articles,
     }
-
     render() {
         return (
             <div className="container">

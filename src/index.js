@@ -5,6 +5,7 @@ import bootStrapJs from 'bootstrap/dist/js/bootstrap.bundle.js';
 import moment from 'moment';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+// import App from './em_react/App';
 // import App from './App';
 // import App from './componentsInComponents/App';
 // import App from './classState/App'
