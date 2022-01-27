@@ -3,21 +3,6 @@ import ReactDOM from 'react-dom';
 import moment from "moment"
 import CommentList from "./CommentList";
 
-function Showarticle(props) {
-    if (!props.data.state.boolean) {
-        return null;
-    }
-
-    return (
-        <div className="collapse show">
-            <p className="card-text my-3 text-secondary">{props.data.props.article.text}</p>
-            <div className="my-3 bg-body">
-                <CommentList comments={props.data.props.article.comments} />
-            </div>
-        </div>
-    );
-}
-
 class Article extends React.Component {
     state = {
         boolean: false
@@ -38,7 +23,16 @@ class Article extends React.Component {
                             </a>
                         </div>
                         <div className="mb-1 text-muted">{moment(this.props.article.date).format('MMMM D, YYYY')}</div>
-                        <Showarticle data={this} />
+                        {!this.state.boolean ?
+                            null
+                            :
+                            <div className="collapse show">
+                                <p className="card-text my-3 text-secondary">{this.props.article.text}</p>
+                                <div className="my-3 bg-body">
+                                    <CommentList comments={this.props.article.comments} />
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

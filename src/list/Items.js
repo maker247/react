@@ -1,15 +1,10 @@
 import react from "react"
 
-class Items extends react.Component {
-    render() {
-        return (
-                <ul className="list-group">
-                    {this.props.items.map((item, index) => (
-                        <li key={index} className="list-group-item">{item.name} - {item.price}</li>
-                    ))}
-                </ul>
-        )
-    }
+const Item = (props) => {
+    const {item} = props
+    return (
+        <li className="list-group-item">{item.name} - {item.price}</li>
+    )
 }
 
-export default Items
+export default Item

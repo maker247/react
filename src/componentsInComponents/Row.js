@@ -1,4 +1,4 @@
-function Row(props) {
+const Row = (props) => {
     return (
         <tr>
             <td>{props.item.id}</td>
