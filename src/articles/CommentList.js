@@ -1,34 +1,28 @@
-import React from "react"
+import React, { useContext } from "react"
+import context from "./context"
 import Comment from "./Comment"
 
-class CommentList extends React.Component {
-    state = {
-        boolean: false
-    }
-    showComment = () => {
-        this.setState(state => ({
-            boolean: !state.boolean
-        }));
-    }
-    render() {
-        return (
-            <div>
-                <div className="d-flex justify-content-between border-bottom">
-                    <a href="#" onClick={this.showComment} className="align-items-center rounded collapsed" data-bs-toggle="collapse">
-                        <h6 className="pb-2 mb-0 text-primary">{this.state.boolean ? 'hide comments' : 'show comments'}</h6>
-                    </a>
-                </div>
-                {!this.state.boolean ?
-                    null :
-                    <div className="collapse show">
-                        {this.props.comments !== undefined ? this.props.comments.map((item, index) => (
-                            <Comment comment={item} key={item.id} />
-                        )) : <h5 className="text-secondary mt-3">no comment yet!</h5>}
-                    </div>
-                }
+const CommentList = (props) => {
+    const {showComments} = useContext(context);
+    return (
+        <div>
+            <div className="d-flex justify-content-between border-bottom">
+                <a href="#" className="align-items-center rounded collapsed" onClick={() => showComments(props.articleId)} data-bs-toggle="collapse">
+                    <h6 className="pb-2 mb-0 text-primary">{props.showComments ? 'hide comments' : 'show comments'}</h6>
+                </a>
             </div>
-        )
-    }
+            {props.showComments ?
+            props.comments.map((comment, index) => (
+            <div className="">
+                <Comment key={index} comment={comment}/>
+            </div>
+            ))
+            :
+            null
+            }
+        </div>
+    )
+    
 }
 
 export default CommentList

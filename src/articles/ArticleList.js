@@ -1,10 +1,14 @@
-import Article from "./Article"
+import React, {useContext} from "react"
+import Article from "./Article";
+import context from "./context";
 
-function ArticleList(props) {
+const ArticleList = () => {
+    const {articles, showArticle} = useContext(context)
+    
     return (
         <div className="row">
-            {props.articles.map((item, index) => (
-                <Article article={item} key={item.id} index={index} />
+            {articles.map((article, index) => (
+            <Article key={article.id} article={article} showArticle={showArticle} />
             ))}
         </div>
     )
