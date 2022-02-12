@@ -9,19 +9,8 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import { Icon } from '@mui/material';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function BasicTable() {
+export default function BasicTable(props) {
+  var index = 1
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -35,22 +24,22 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {props.users.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {index++}
               </TableCell>
-              <TableCell>{row.calories}</TableCell>
-              <TableCell>{row.fat}</TableCell>
-              <TableCell>{row.carbs}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.age}</TableCell>
+              <TableCell>{row.gender}</TableCell>
               <TableCell>
-              <IconButton aria-label="edit">
+              <IconButton aria-label="edit" onClick={() => props.changeEditStatus(true,row)}>
                 <Icon color='success'>edit</Icon>
               </IconButton>
-              <IconButton aria-label="delete">
+              <IconButton aria-label="delete" onClick={() => props.onDelete(row.id)}>
                 <Icon color='error'>delete</Icon>
               </IconButton>
               </TableCell>
