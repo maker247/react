@@ -41,15 +41,6 @@ export default function App() {
     return (
         <Container maxWidth="lg">
             <Typography variant='h4' sx={{py:5, textAlign:'center'}}>User Info</Typography>
-            <Grid container spacing={2} sx={{marginTop: '1rem'}}>
-                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography variant='h5' sx={{mb:2}}>View User</Typography>
-                    <Button variant='contained' sx={{mb:3}} onClick={() => changeEditStatus(false, null)} type="button">Create</Button>
-                </Grid>
-                <Grid item xs={12} sx={{mb:5}}>
-                    <BasicTable onDelete={deleteUser} changeEditStatus={changeEditStatus} users = {users}></BasicTable>
-                </Grid>
-            </Grid>
             {editStatus ?
                 <>
                 <Typography variant='h5' sx={{mb:2}}>Edit User</Typography>
@@ -61,6 +52,15 @@ export default function App() {
                 <Form storeUser={storeUser} status={editStatus}></Form>
                 </>
             }   
+            <Grid container spacing={2} sx={{marginTop: '1rem'}}>
+                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Typography variant='h5' sx={{mb:2}}>View User</Typography>
+                    <Button variant='contained' sx={{mb:3}} onClick={() => changeEditStatus(false, null)} type="button">Create</Button>
+                </Grid>
+                <Grid item xs={12} sx={{mb:5}}>
+                    <BasicTable onDelete={deleteUser} changeEditStatus={changeEditStatus} users = {users}></BasicTable>
+                </Grid>
+            </Grid>
         </Container>
     )
 }
