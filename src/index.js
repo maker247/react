@@ -18,9 +18,10 @@ import reportWebVitals from './reportWebVitals';
 // import App from './Hook/UseMemo/App'
 // import App from './HookAssignments/UserInformationTable/App';
 // import App from './form/App'
-import App from './muiAssignment/form/App'
+// import App from './muiAssignment/form/App'
 // import App from './react-router/App'
 // import App from './react-router-private/App'
+import App from './muiAssignment/privateRoute/App'
 
 
 ReactDOM.render(
