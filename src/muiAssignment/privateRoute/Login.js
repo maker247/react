@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
 import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, createTheme, ThemeProvider} from '@mui/material';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import CryptoJS from 'crypto-js';
+import { textAlign } from '@mui/system';
 
 const theme = createTheme();
 
 export default function SignIn() {
     const [form, setForm] = useState({email: '', password: ''})
+    const [status, setStatus] = useState(false)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,9 +26,27 @@ export default function SignIn() {
     }
 
     const onLogin = (event) => {
+        const data = new FormData(event.currentTarget);
         event.preventDefault();
-        localStorage.setItem('token', `${form.email}${form.password}`)
-        navigate('/')
+        const secret = localStorage.getItem('secret');
+        if(!secret) {
+            navigate('/register')
+        } else {
+            const auth = `${data.get('email')}${data.get('password')}`;
+        
+            var bytes  = CryptoJS.AES.decrypt(secret, 'secret');
+            var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+
+            if(auth === plaintext) {
+                localStorage.clear();
+                localStorage.setItem('token', secret)
+                navigate('/')
+            } else {
+                setStatus(true)
+                navigate('/login')
+            }
+        }
+    
     }
 
     return (
@@ -47,6 +68,12 @@ export default function SignIn() {
                 Sign in
                 </Typography>
                 <Box component="form" onSubmit={onLogin} noValidate sx={{ mt: 1 }}>
+                {status ? 
+                    <div style={{color:'red'}}>
+                        <small>Wrong Credential!</small>
+                    </div>:
+                    null
+                }
                 <TextField
                     margin="normal"
                     required
@@ -92,9 +119,9 @@ export default function SignIn() {
                     </Link>
                     </Grid>
                     <Grid item>
-                    <Link href="#" variant="body2">
-                        {"Don't have an account? Sign Up"}
-                    </Link>
+                    <RouterLink to="/register">
+                        <small>{"Don't have an account? Sign Up"}</small>
+                    </RouterLink>
                     </Grid>
                 </Grid>
                 </Box>

@@ -4,6 +4,7 @@ import Home from '../Home';
 import Albums from '../Albums';
 import Album from '../Album';
 import Login from '../Login';
+import Register from '../Register';
 import Contact from '../Contact';
 import PrivateRoute from '../SecretRoute';
 
@@ -11,7 +12,8 @@ export default function myRoutes() {
     return (
         <Router>
                 <Routes>
-                    <Route path="login" element={<Login />}></Route>
+                    <Route path="/login" element={<Login />}></Route>
+                    <Route path="/register" element={<Register />}></Route>
                     <Route path="/" index element={<PrivateRoute children={<Home />} />}></Route>
                     <Route path="/albums" element={<PrivateRoute children={<Albums />} />}></Route>
                     <Route path="/albums/:id" element={<PrivateRoute children={<Album />} />}></Route>
